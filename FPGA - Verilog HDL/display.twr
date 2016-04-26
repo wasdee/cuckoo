@@ -1,0 +1,138 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 4
+-n 3 -fastpaths -xml display.twx display.ncd -o display.twr display.pcf -ucf
+impre_wanava.ucf
+
+Design file:              display.ncd
+Physical constraint file: display.pcf
+Device,package,speed:     xc3s400,tq144,-4 (PRODUCTION 1.39 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+INFO:Timing:3390 - This architecture does not support a default System Jitter 
+   value, please add SYSTEM_JITTER constraint to the UCF to modify the Clock 
+   Uncertainty calculation.
+INFO:Timing:3389 - This architecture does not support 'Discrete Jitter' and 
+   'Phase Error' calculations, these terms will be zero in the Clock 
+   Uncertainty calculation.  Please make appropriate modification to 
+   SYSTEM_JITTER to account for the unsupported Discrete Jitter and Phase 
+   Error.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock onOffAlarm to Pad
+------------+------------+------------------+--------+
+            | clk (edge) |                  | Clock  |
+Destination |   to PAD   |Internal Clock(s) | Phase  |
+------------+------------+------------------+--------+
+buzz        |   15.811(R)|ring/ringAble     |   0.000|
+------------+------------+------------------+--------+
+
+Clock setH to Pad
+------------+------------+------------------+--------+
+            | clk (edge) |                  | Clock  |
+Destination |   to PAD   |Internal Clock(s) | Phase  |
+------------+------------+------------------+--------+
+buzz        |   16.292(R)|ring/ringAble     |   0.000|
+------------+------------+------------------+--------+
+
+Clock setM to Pad
+------------+------------+------------------+--------+
+            | clk (edge) |                  | Clock  |
+Destination |   to PAD   |Internal Clock(s) | Phase  |
+------------+------------+------------------+--------+
+buzz        |   16.091(R)|ring/ringAble     |   0.000|
+------------+------------+------------------+--------+
+
+Clock to Setup on destination clock onOffAlarm
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+onOffAlarm     |   -0.436|   -0.436|         |         |
+setH           |    0.045|    0.045|         |         |
+setM           |   -0.156|   -0.156|         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock setH
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+onOffAlarm     |   -0.821|   -0.821|         |         |
+setH           |   -0.340|   -0.340|         |         |
+setM           |   -0.541|   -0.541|         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock setM
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+onOffAlarm     |   -0.660|   -0.660|         |         |
+setH           |   -0.179|   -0.179|         |         |
+setM           |   -0.380|   -0.380|         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock sysclk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+sysclk         |         |         |         |    5.863|
+---------------+---------+---------+---------+---------+
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+ci<0>          |led<0>         |   10.337|
+ci<1>          |led<1>         |   10.436|
+ci<2>          |led<2>         |   10.314|
+ci<3>          |led<3>         |    9.698|
+ci<4>          |led<4>         |   10.648|
+ci<5>          |led<5>         |    9.201|
+ci<6>          |led<6>         |    9.165|
+ci<7>          |led<7>         |    8.653|
+displayMode    |dp             |   11.967|
+displayMode    |seg<0>         |   15.183|
+displayMode    |seg<1>         |   15.000|
+displayMode    |seg<2>         |   14.882|
+displayMode    |seg<3>         |   14.439|
+displayMode    |seg<4>         |   14.216|
+displayMode    |seg<5>         |   15.091|
+displayMode    |seg<6>         |   14.837|
+---------------+---------------+---------+
+
+
+Analysis completed Tue Apr 26 00:01:10 2016 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 158 MB
+
+
+

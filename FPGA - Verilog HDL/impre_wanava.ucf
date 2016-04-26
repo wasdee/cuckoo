@@ -1,0 +1,97 @@
+///////////////////////////
+//////////BCD -7seg////////////
+///////////////////////////
+NET "segEn[0]" LOC=p31;
+NET "segEn[1]" LOC=p33;
+NET "segEn[2]" LOC=p36;
+NET "segEn[3]" LOC=p41;
+
+NET "seg[6]" LOC=p40;
+NET "seg[5]" LOC=p35;
+NET "seg[4]" LOC=p32;
+NET "seg[3]" LOC=p30;
+NET "seg[2]" LOC=p27;
+NET "seg[1]" LOC=p25;
+NET "seg[0]" LOC=p23;
+NET "dp" LOC=p20;
+
+/////////////////////////////////////////
+//////////INPUT - internal sw////////////
+/////////////////////////////////////////
+## dip sw 
+#NET "displayMode" LOC=p52;
+#NET "sw2" LOC=p53;
+#NET "sw3" LOC=p55;
+#NET "sw4" LOC=p56;
+#NET "sw5" LOC=p59;
+#NET "sw6" LOC=p60;
+NET "displayMode" LOC=p63;
+NET "onOffAlarm" LOC=p68;
+
+##button
+NET "yudRong" LOC=p44;
+#NET "sw2" LOC=p46;
+#NET "sw3" LOC=p47;
+NET "setH" LOC=p50;
+NET "setM" LOC=p51;
+
+///////////////////////////
+//////////clk//////////////
+///////////////////////////
+NET "sysclk" LOC=p127;
+
+///////////////////////////////////////
+//////////output LED BUZZER////////////
+///////////////////////////////////////
+NET "led[0]" LOC=p70;
+NET "led[1]" LOC=p77;
+NET "led[2]" LOC=p69;
+NET "led[3]" LOC=p76;
+NET "led[4]" LOC=p74;
+NET "led[5]" LOC=p79;
+NET "led[6]" LOC=p73;
+NET "led[7]" LOC=p78;
+
+NET "buzz" LOC=p125;
+
+///////////////////////////////////////
+//////////INPUT - external////////////
+///////////////////////////////////////
+
+##############     k4     ##############
+#last 0
+NET "ci[0]" LOC=p123;
+NET "ci[1]" LOC=p119;
+NET "ci[2]" LOC=p116;
+NET "ci[3]" LOC=p112;
+#last 4
+NET "ci[4]" LOC=p107;
+NET "ci[5]" LOC=p104;
+NET "ci[6]" LOC=p102;
+NET "ci[7]" LOC=p99;
+
+#last 8
+NET "status[0]" LOC=p97;
+NET "status[1]" LOC=p95;
+NET "status[2]" LOC=p92;
+NET "status[3]" LOC=p89;
+#last 12
+#NET "l4" LOC=p86;
+#NET "l5" LOC=p84;
+#NET "l6" LOC=p82;
+
+#NET "l7" LOC=p79; //led5
+#NET "SCL" LOC=p77; //led1
+#NET "SDA" LOC=p74; //led4
+
+##############     k3     ##############
+#last 0
+#NET "SCL" LOC=p122;
+#NET "SDA" LOC=p118;
+#NET "l2" LOC=p113;
+#NET "l3" LOC=p108;
+
+##############     i2c     ##############
+#NET "SCL" CLOCK_DEDICATED_ROUTE = FALSE;
+#NET "SCL" LOC=p123;
+#NET "SDA" LOC=p119;
