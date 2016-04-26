@@ -1,0 +1,4 @@
+verilog work "c74160.v"
+verilog work "clock.v"
+verilog work "t_clock.v"
+verilog work "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

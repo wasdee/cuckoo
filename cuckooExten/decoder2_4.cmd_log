@@ -1,0 +1,3 @@
+vhdtdtfi -lang verilog -prj cuckooExten -o C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/decoder2_4.tfi -lib work C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten//decoder2_4.v -module decoder2_4 -template C:/Xilinx/14.7/ISE_DS/ISE//data/tfi.tft -deleteonerror 
+vhdtdtfi -lib work C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/decoder2_4.v -lang verilog -prj cuckooExten -o decoder2_4.spl -module decoder2_4 -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3 decoder2_4.spl C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/decoder2_4.sym 

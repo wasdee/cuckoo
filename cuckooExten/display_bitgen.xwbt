@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Users\Codustry\Dropbox\CPE\digital\project\cuckooExten\display.ncd
+OUTFILE=C:\Users\Codustry\Dropbox\CPE\digital\project\cuckooExten\display.bit
+FAMILY=Spartan3
+PART=xc3s400-4tq144
+WORKINGDIR=C:\Users\Codustry\Dropbox\CPE\digital\project\cuckooExten
+LICENSE=WebPack
+USER_INFO=211170388_0_0_959

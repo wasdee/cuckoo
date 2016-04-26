@@ -1,0 +1,12 @@
+xst -intstyle ise -ifn "C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/display.xst" -ofn "C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/display.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc impre_wanava.ucf -p xc3s400-tq144-4 display.ngc display.ngd  
+map -intstyle ise -p xc3s400-tq144-4 -cm area -ir off -pr off -c 100 -o display_map.ncd display.ngd display.pcf 
+par -w -intstyle ise -ol high -t 1 display_map.ncd display.ncd display.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml display.twx display.ncd -o display.twr display.pcf -ucf impre_wanava.ucf 
+bitgen -intstyle ise -f display.ut display.ncd 
+xst -intstyle ise -ifn "C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/display.xst" -ofn "C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/display.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc impre_wanava.ucf -p xc3s400-tq144-4 display.ngc display.ngd  
+map -intstyle ise -p xc3s400-tq144-4 -cm area -ir off -pr off -c 100 -o display_map.ncd display.ngd display.pcf 
+par -w -intstyle ise -ol high -t 1 display_map.ncd display.ncd display.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml display.twx display.ncd -o display.twr display.pcf -ucf impre_wanava.ucf 
+bitgen -intstyle ise -f display.ut display.ncd 
