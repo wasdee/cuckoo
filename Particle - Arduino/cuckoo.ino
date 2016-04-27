@@ -1,5 +1,6 @@
 // This #include statement was automatically added by the Particle IDE.
 #include "SparkTime/SparkTime.h"
+
 #include <climits>
 #define bitRead(value, bit) (((value) >> (bit)) & 0x01)
 #define bitSet(value, bit) ((value) |= (1UL << (bit)))
@@ -20,25 +21,33 @@ typedef uint16_t word;
 
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 #define highByte(w) ((uint8_t) ((w) >> 8))
+
 UDP UDPClient;
 SparkTime rtc;
-
 unsigned long currentTime;
 unsigned long lastTime = 0UL;
 String timeStr;
+int timezone = 6;
+
 const byte numPins = 8;
 byte pins[] = {0,1,2,3,4,5,6,7};
 
 bool alarmOnceSet = false;
-short alarmHour = 0;
-short alarmMinute = 0;
 bool timeOnceSet = false;
-short lastFPGAState = 0xf;
-bool internetOnceConnected = false;
+int alarmHour = 0;
+int alarmMinute = 0;
+int isRinging = 0xf;
 
 void setup() {
-    Particle.publish("devStatus", "Device ON - Cuckoo MODE");
-
+    Particle.publish("devStatus", "Device ON - cuckoo activate!");
+    
+    Particle.function("setAlarm", setAlarmOnFPGA);
+    Particle.function("setTimezone", setTimezone);
+    Particle.variable("alarmHour", alarmHour);
+    Particle.variable("alarmMinute", alarmMinute);
+    Particle.variable("isRinging", isRinging);
+    Particle.variable("timezone", timezone);
+    
     //internet time sync
     rtc.begin(&UDPClient, "north-america.pool.ntp.org");
     rtc.setTimeZone(6); // gmt offset
@@ -65,7 +74,7 @@ void setup() {
 }
 
 void loop() {
-    if(lastFPGAState != 0xf){
+    if(isRinging != 0xf){
         if(timeOnceSet == true){
             //check if an hour already
         }else{
@@ -76,8 +85,15 @@ void loop() {
     reportState();
 }
 
+// for GMT -7 use -7 but for GMT +7 use 6
+int setTimezone(String dummy){
+    Particle.publish("debug", "run setTimezone, tz="+String(timezone));
+    rtc.setTimeZone(timezone);
+    return 1;
+}
+
 void checkInternet(){
-    if(internetOnceConnected = WiFi.ready())digitalWrite(A5, HIGH);
+    if(WiFi.ready())digitalWrite(A5, HIGH);
     else digitalWrite(A5, LOW);
 }
 
@@ -96,7 +112,7 @@ void reportState(){
         case 0xf: Particle.publish("fpgaStatus", "fpga is on but unprogramed"); digitalWrite(A4,HIGH); break;
         default: break;
     }
-    lastFPGAState = state ;
+    isRinging = state ;
 }
 
 void setIdleStateOnFPGA(){
@@ -137,12 +153,13 @@ void setTimeOnFPGA(){
     setOpPins(0xb);
     setDataPins(second__);
     delay(50);
-    Particle.publish("Debug", "Clock is seted at"+rtc.ISODateString(currentTime));
+    Particle.publish("Debug", "Clock is seted at "+rtc.ISODateString(currentTime));
 }
 
-void setAlarmOnFPGA(short hour,short min){
-    short hour_ = hour/10;
-    short hour__ = hour-hour_*10;
+int setAlarmOnFPGA(String dummy){
+    Particle.publish("debug", "run setAlarmOnFPGA");
+    short hour_ = alarmHour/10;
+    short hour__ = alarmHour-hour_*10;
     setOpPins(0x6);
     setDataPins(hour__);
     delay(5);
@@ -150,8 +167,8 @@ void setAlarmOnFPGA(short hour,short min){
     setDataPins(hour_);
     delay(5);
 
-    short min_ = min/10;
-    short min__ = min-min_*10;
+    short min_ = alarmMinute/10;
+    short min__ = alarmMinute-min_*10;
     setOpPins(0x4);
     setDataPins(min_);
     delay(5);
@@ -159,16 +176,8 @@ void setAlarmOnFPGA(short hour,short min){
     setDataPins(min__);
     delay(5);
 
-    timeStr = "";
-    timeStr += rtc.hour12String(currentTime);
-    timeStr += ":";
-    timeStr += rtc.minuteString(currentTime);
-    timeStr += ":";
-    timeStr += rtc.secondString(currentTime);
-    timeStr += " ";
-    timeStr += rtc.AMPMString(currentTime);
-    Particle.publish("info", timeStr);
-    Particle.publish("Debug", "Clock is seted at"+rtc.ISODateString(currentTime)+"  "+timeStr);
+    Particle.publish("Debug", "Alarm is seted at "+String(alarmHour)+":"+String(alarmMinute));
+    return 1;
 }
 
 /*function to set pin D0-D3 to desire byte*/
@@ -183,41 +192,5 @@ void setDataPins(byte data){
     for(int i=4;i<8;i++){
         byte state = bitRead(data, i);
         digitalWrite(pins[i], state);
-    }
-}
-
-
-void publishTime(){
-    currentTime = rtc.now();
-    if (currentTime != lastTime) {
-        byte sec = rtc.second(currentTime);
-        if (sec == 10) {
-        	// Build Date String
-        	timeStr = "";
-        	timeStr += rtc.dayOfWeekString(currentTime);
-        	timeStr += ", ";
-        	timeStr += rtc.monthNameString(currentTime);
-        	timeStr += " ";
-        	timeStr += rtc.dayString(currentTime);
-        	timeStr += ", ";
-        	timeStr += rtc.yearString(currentTime);
-        	Particle.publish("info", timeStr);
-        } else if (sec == 40) {
-    	    // Including current timezone
-    	    Particle.publish("info", rtc.ISODateString(currentTime));
-    	    //Serial.println(rtc.ISODateString(currentTime));
-        } else {
-        	// Just the time in 12 hour format
-        	timeStr = "";
-        	timeStr += rtc.hour12String(currentTime);
-        	timeStr += ":";
-        	timeStr += rtc.minuteString(currentTime);
-        	timeStr += ":";
-        	timeStr += rtc.secondString(currentTime);
-        	timeStr += " ";
-        	timeStr += rtc.AMPMString(currentTime);
-        	Particle.publish("info", timeStr);
-        }
-        lastTime = currentTime;
     }
 }
