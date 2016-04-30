@@ -41,14 +41,14 @@ int isRinging = 0xf;
 
 void setup() {
     Particle.publish("devStatus", "Device ON - cuckoo activate!");
-    
+
     Particle.function("setAlarm", setAlarmOnFPGA);
     Particle.function("updateTime", setTimeOnFPGA);
     //Particle.function("set Timezone", setTimezone);
     Particle.function("ringASecond", ringAFewSecond);
     Particle.function("triggerRing", triggerRing);
     Particle.function("setTimezone", setTimezone);
-    
+
     Particle.function("imInBangkok", imInBangkok);
     Particle.function("imInTokyo", imInTokyo);
     Particle.function("imInDubai", imInDubai);
@@ -56,19 +56,19 @@ void setup() {
     Particle.function("imInNewYork", imInNewYork);
     Particle.function("imInShanghai", imInShanghai);
     Particle.function("imInSydney", imInSydney);
-    
-    
+
+
     Particle.variable("alarmHour", alarmHour);
     Particle.variable("alarmMinute", alarmMinute);
     Particle.variable("isRinging", isRinging);
     Particle.variable("timezone", timezone);
-    
+
     //internet time sync
     rtc.begin(&UDPClient, "north-america.pool.ntp.org");
     rtc.setUseEuroDSTRule(true);
     rtc.setUseDST(false);
     rtc.setTimeZone(7); // gmt offset
-    
+
 
     //set pin D0-D7 to be output
     for(int i=0;i<numPins;i++){
@@ -107,7 +107,7 @@ void loop() {
 //eg (GMT+,DST) -8
 int setTimezone(String timezoneArg){
     int commaIndex = timezoneArg.indexOf(',');
-    
+
     int gmt = timezoneArg.substring(0,commaIndex).toInt();
     String dst = timezoneArg.substring(commaIndex);
     if(dst == "true"){
@@ -121,81 +121,45 @@ int setTimezone(String timezoneArg){
     return 1;
 }
 
-int imInSanFrans(String dummy){
-    timezone=-7;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));
-    return 1;
-}
+int setTimezone(String place){
+    int commaIndex = timezoneArg.indexOf(',');
+    switch(place){
+        //Europe
+        case "london": setTimezone("0,false,true"); break;
+        case "paris": setTimezone("+2,false,true"); break;
+        case "zurich": setTimezone("+2,false,true"); break;
+        case "berlin": setTimezone("+2,false,true"); break;
+        case "rome": setTimezone("+2,false,true"); break;
+        case "moscow": setTimezone("+3,false,false"); break;
+        //Asia
+        case "bangkok": setTimezone("+7,false,false"); break;
+        case "shanghai": setTimezone("+8,false,false"); break;
+        case "beijing": setTimezone("+8,false,false"); break;
+        case "singapore": setTimezone("+8,false,false"); break;
+        case "taipei": setTimezone("+8,false,false"); break;
+        case "tokyo": setTimezone("+9,false,false"); break;
+        case "seoul": setTimezone("+9,false,false"); break;
+        //Africa
+        case "capetown": setTimezone("+2,false,false"); break;
+        case "dubai": setTimezone("+4,false,false"); break;
+        //America
+        case "honolulu": setTimezone("-10,true,false"); break;
+        case "sanfrancisco": setTimezone("-8,true,false");
+        case "newyork": setTimezone("-4,true,false"); break;
+        case "denver": setTimezone("-6,true,false"); break;
+        case "miami": setTimezone("-4,true,false"); break;
+    }
 
-int imInTokyo(String dummy){
-    timezone=9;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInBangkok(String dummy){
-    timezone=7;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInMoscow(String dummy){
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    timezone=3;
-    rtc.setTimeZone(timezone);
-    return 1;
-}
-
-int imInDubai(String dummy){
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    timezone=4;
-    rtc.setTimeZone(timezone);
-    return 1;
-}
-
-int imInNewYork(String dummy){
-    timezone=-4;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInShanghai(String dummy){
-    timezone=8;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInSydney(String dummy){
-    timezone=0;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInCapetown(String dummy){
-    timezone=0;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInHonolulu(String dummy){
-    timezone=-10;
-    rtc.setTimeZone(timezone);
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    return 1;
-}
-
-int imInLondon(String dummy){
-    
-    timezone=0;
-    Particle.publish("debug", "run setTimezone, tz="+String(timezone));setTimeOnFPGA("");
-    rtc.setTimeZone(timezone);
+    int gmt = timezoneArg.substring(0,commaIndex).toInt();
+    String dst = timezoneArg.substring(commaIndex);
+    if(dst == "true"){
+        rtc.setUseDST(true);
+    }else{
+        rtc.setUseDST(false);
+    }
+    rtc.setTimeZone(gmt);
+    setTimeOnFPGA("");
+    Particle.publish("debug", "run setTimezone, tz="+String(gmt)+" dst="+dst);
     return 1;
 }
 
@@ -238,12 +202,12 @@ int setTimeOnFPGA(String dummy){
     delay(50);
     setDataPins(hour_);
     delay(100);
-    
+
     setOpPins(0xe);//1110 unit
     delay(50);
     setDataPins(hour__);
     delay(100);
-    
+
     Particle.publish("debug", "h="+String(hour_)+String(hour__));
     setIdleStateOnFPGA();
 
@@ -253,26 +217,26 @@ int setTimeOnFPGA(String dummy){
     setOpPins(0xd);
     setDataPins(min_);
     delay(10);
-    
+
     setOpPins(0xc); //1100
     setDataPins(min__);
     delay(10);
-    
+
     setIdleStateOnFPGA();
 
     short second =  rtc.second(currentTime);
     short second_ = second/10;
     short second__ = second-second_*10;
-    
+
     setOpPins(0xb);
     setDataPins(second_);
     delay(10);
-    
+
     setOpPins(0xa); //1010
     setDataPins(second__);
     delay(10);
     setIdleStateOnFPGA();
-    
+
     setIdleStateOnFPGA();
     Particle.publish("Debug", "Clock is seted at "+rtc.ISODateString(currentTime));
     return 1;
@@ -280,19 +244,19 @@ int setTimeOnFPGA(String dummy){
 
 int setAlarmOnFPGA(String alarmTime){
     Particle.publish("debug", "run setAlarmOnFPGA with arg="+alarmTime);
-    
+
     alarmHour = alarmTime.substring(0,2).toInt();
     short hour_ = alarmHour/10;
     short hour__ = alarmHour-hour_*10;
     setOpPins(0x6);
     setDataPins(hour__);
     delay(10);
-    
+
     setOpPins(0x7);
     setDataPins(hour_);
     delay(100);
     setIdleStateOnFPGA();
-    
+
     alarmMinute = alarmTime.substring(3).toInt();
     short min_ = alarmMinute/10;
     short min__ = alarmMinute-min_*10;
@@ -302,7 +266,7 @@ int setAlarmOnFPGA(String alarmTime){
     setOpPins(0x5);
     setDataPins(min_);
     delay(10);
-    
+
     Particle.publish("debug", "it took h="+alarmTime.substring(0,2)+"m="+alarmTime.substring(3));
     setIdleStateOnFPGA();
     Particle.publish("Debug", "Alarm is seted at "+String(alarmHour)+":"+String(alarmMinute));
@@ -311,7 +275,7 @@ int setAlarmOnFPGA(String alarmTime){
 
 int setAlarmNActive(String alarmTime){
     Particle.publish("debug", "run setAlarmOnFPGA with arg="+alarmTime);
-    
+
     alarmHour = alarmTime.substring(0,2).toInt();
     short hour_ = alarmHour/10;
     short hour__ = alarmHour-hour_*10;
@@ -320,7 +284,7 @@ int setAlarmNActive(String alarmTime){
     setOpPins(0x7);
     setDataPins(hour_);
     setIdleStateOnFPGA();
-    
+
     alarmMinute = alarmTime.substring(3).toInt();
     short min_ = alarmMinute/10;
     short min__ = alarmMinute-min_*10;
@@ -329,9 +293,9 @@ int setAlarmNActive(String alarmTime){
     setOpPins(0x5);
     setDataPins(min_);
     setIdleStateOnFPGA();
-    
+
     turnAlarm("on");
-    
+
     Particle.publish("debug", "it took h="+alarmTime.substring(0,2)+"m="+alarmTime.substring(3));
     Particle.publish("Debug", "Alarm is seted at "+String(alarmHour)+":"+String(alarmMinute));
     return 1;
@@ -349,7 +313,7 @@ int turnAlarm(String onOrOff){
         sw[1]=false;
         updateSW();
     }
-    
+
     setIdleStateOnFPGA();
     return 1;
 }
@@ -364,20 +328,20 @@ int triggerRing(String dummy){
         sw[2]=true;
         updateSW();
     }
-    
+
     setIdleStateOnFPGA();
     return 1;
 }
 
 int ringAFewSecond(String dummy){
     setOpPins(0x8);
-    
+
     sw[2]=true;
     updateSW();
     delay(3000);
     sw[2]=false;
     updateSW();
-    
+
     setIdleStateOnFPGA();
     return 1;
 }
