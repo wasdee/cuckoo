@@ -44,20 +44,10 @@ void setup() {
 
     Particle.function("setAlarm", setAlarmOnFPGA);
     Particle.function("updateTime", setTimeOnFPGA);
-    //Particle.function("set Timezone", setTimezone);
     Particle.function("ringASecond", ringAFewSecond);
     Particle.function("triggerRing", triggerRing);
     Particle.function("setTimezone", setTimezone);
-
-    Particle.function("imInBangkok", imInBangkok);
-    Particle.function("imInTokyo", imInTokyo);
-    Particle.function("imInDubai", imInDubai);
-    Particle.function("imInSanFrans", imInSanFrans);
-    Particle.function("imInNewYork", imInNewYork);
-    Particle.function("imInShanghai", imInShanghai);
-    Particle.function("imInSydney", imInSydney);
-
-
+    Particle.function("setCTimezone", setTestTimeZone);
     Particle.variable("alarmHour", alarmHour);
     Particle.variable("alarmMinute", alarmMinute);
     Particle.variable("isRinging", isRinging);
@@ -121,47 +111,98 @@ int setTimezone(String timezoneArg){
     return 1;
 }
 
-int setTimezone(String place){
-    int commaIndex = timezoneArg.indexOf(',');
-    switch(place){
-        //Europe
-        case "london": setTimezone("0,false,true"); break;
-        case "paris": setTimezone("+2,false,true"); break;
-        case "zurich": setTimezone("+2,false,true"); break;
-        case "berlin": setTimezone("+2,false,true"); break;
-        case "rome": setTimezone("+2,false,true"); break;
-        case "moscow": setTimezone("+3,false,false"); break;
-        //Asia
-        case "bangkok": setTimezone("+7,false,false"); break;
-        case "shanghai": setTimezone("+8,false,false"); break;
-        case "beijing": setTimezone("+8,false,false"); break;
-        case "singapore": setTimezone("+8,false,false"); break;
-        case "taipei": setTimezone("+8,false,false"); break;
-        case "tokyo": setTimezone("+9,false,false"); break;
-        case "seoul": setTimezone("+9,false,false"); break;
-        //Africa
-        case "capetown": setTimezone("+2,false,false"); break;
-        case "dubai": setTimezone("+4,false,false"); break;
-        //America
-        case "honolulu": setTimezone("-10,true,false"); break;
-        case "sanfrancisco": setTimezone("-8,true,false");
-        case "newyork": setTimezone("-4,true,false"); break;
-        case "denver": setTimezone("-6,true,false"); break;
-        case "miami": setTimezone("-4,true,false"); break;
+int setTestTimeZone(String place){
+    //Asia
+    if(place == "bangkok"){
+        setTimezone("+7,false,false");
+        Particle.publish("Set Timezone","I'm in Bangkok");
     }
-
-    int gmt = timezoneArg.substring(0,commaIndex).toInt();
-    String dst = timezoneArg.substring(commaIndex);
-    if(dst == "true"){
-        rtc.setUseDST(true);
-    }else{
-        rtc.setUseDST(false);
+    else if(place == "shanghai"){
+        setTimezone("+8,false,false");
+        Particle.publish("Set Timezone","I'm in Shanghai");
     }
-    rtc.setTimeZone(gmt);
-    setTimeOnFPGA("");
-    Particle.publish("debug", "run setTimezone, tz="+String(gmt)+" dst="+dst);
-    return 1;
+     else if(place == "beijing"){
+        setTimezone("+8,false,false");
+        Particle.publish("Set Timezone","I'm in Beijing");
+    }
+     else if(place == "singapore"){
+        setTimezone("+8,false,false");
+        Particle.publish("Set Timezone","I'm in Singapore");
+    }
+     else if(place == "taipei"){
+        setTimezone("+8,false,false");
+        Particle.publish("Set Timezone","I'm in Taipei");
+    }
+     else if(place == "tokyo"){
+        setTimezone("+9,false,false");
+        Particle.publish("Set Timezone","I'm in Tokyo");
+    }
+    else if(place == "seoul"){
+        setTimezone("+9,false,false");
+        Particle.publish("Set Timezone","I'm in Seoul");
+    }
+    //Europe
+    else if(place == "london"){
+        setTimezone("0,false,true");
+        Particle.publish("Set Timezone","I'm in London");
+    }
+    else if(place == "paris"){
+        setTimezone("+2,false,true");
+        Particle.publish("Set Timezone","I'm in Paris");
+    }
+    else if(place == "zurich"){
+        setTimezone("+2,false,true");
+        Particle.publish("Set Timezone","I'm in Zurich");
+    }
+    else if(place == "berlin"){
+        setTimezone("+2,false,true");
+        Particle.publish("Set Timezone","I'm in Berlin");
+    }
+    else if(place == "rome"){
+        setTimezone("+2,false,true");
+        Particle.publish("Set Timezone","I'm in Rome");
+    }
+    else if(place == "moscow"){
+        setTimezone("+3,false,false");
+        Particle.publish("Set Timezone","I'm in Moscow");
+    }
+    //America
+    else if(place == "newyork"){
+        setTimezone("-4,true,false");
+        Particle.publish("Set Timezone","I'm in NewYork");
+    }
+    else if(place == "sanfrancisco"){
+        setTimezone("-8,true,false");
+        Particle.publish("Set Timezone","I'm in San Francisco");
+    }
+    else if(place == "honolulu"){
+        setTimezone("-10,true,false");
+        Particle.publish("Set Timezone","I'm in Honolulu");
+    }
+    else if(place == "denver"){
+        setTimezone("-6,true,false");
+        Particle.publish("Set Timezone","I'm in Denver");
+    }
+    else if(place == "miami"){
+        setTimezone("-4,true,false");
+        Particle.publish("Set Timezone","I'm in Miami");
+    }
+    //Africa
+    else if(place == "capetown"){
+        setTimezone("+2,false,false");
+        Particle.publish("Set Timezone","I'm in Cape Town");
+    }
+    else if(place == "dubai"){
+        setTimezone("+4,false,false");
+        Particle.publish("Set Timezone","I'm in Dubai");
+    }
+    //Else
+    else{
+        setTimezone("0,false,false");
+        Particle.publish("Set Timezone","Default Timezone to 0 GMT");
+    }
 }
+
 
 void checkInternet(){
     if(WiFi.ready())digitalWrite(A5, HIGH);
@@ -187,8 +228,9 @@ void reportState(){
 }
 
 void setIdleStateOnFPGA(){
-    setOpPins(0x0);
+    setOpPins(0x8);
     setDataPins(0);
+    delay(100);
 }
 
 int setTimeOnFPGA(String dummy){
@@ -334,15 +376,19 @@ int triggerRing(String dummy){
 }
 
 int ringAFewSecond(String dummy){
-    setOpPins(0x8);
-
-    sw[2]=true;
+    setOpPins(0x0);
+    sw[3]=true;
+    sw[1]=true;
     updateSW();
     delay(3000);
-    sw[2]=false;
+    sw[1]=false;
+    sw[3]=false;
     updateSW();
-
+    delay(100);
+    sw[3]=true;
+    updateSW();
     setIdleStateOnFPGA();
+
     return 1;
 }
 
@@ -350,8 +396,9 @@ int ringAFewSecond(String dummy){
 void setDataPins(byte data){
     for(int i=0;i<4;i++){
         byte state = bitRead(data, i);
-        delay(100);
+
         digitalWrite(pins[i], state);
+        delay(100);
     }
 }
 
@@ -359,8 +406,9 @@ void setDataPins(byte data){
 void updateSW(){
     for(int i=0;i<4;i++){
         byte state = bitRead(sw[i], 0);
-        delay(100);
+
         digitalWrite(pins[i], state);
+        delay(100);
     }
 }
 
