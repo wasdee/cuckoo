@@ -1,0 +1,887 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> Reading design: display.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "display.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "display"
+Output Format                      : NGC
+Target Device                      : xc3s400-4-tq144
+
+---- Source Options
+Top Module Name                    : display
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 8
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "c74160.v" in library work
+Compiling verilog file "I2Cslave.v" in library work
+Module <c74160> compiled
+Compiling verilog file "decoder2_4.v" in library work
+Module <I2CslaveWith8bitsIO> compiled
+Compiling verilog file "dataSel1_4.v" in library work
+Module <decoder2_4> compiled
+Compiling verilog file "cuckooRinging.v" in library work
+Module <dataSel1_4> compiled
+Compiling verilog file "counter_2bit.v" in library work
+Module <cuckooRinging> compiled
+Compiling verilog file "clock.v" in library work
+Module <counter_2bit> compiled
+Compiling verilog file "clk_4ms.v" in library work
+Module <clock> compiled
+Compiling verilog file "clk_1s.v" in library work
+Module <clk_4ms> compiled
+Compiling verilog file "BCDto7seg.v" in library work
+Module <clk_1s> compiled
+Compiling verilog file "alarm.v" in library work
+Module <BCDto7seg> compiled
+Compiling verilog file "display.v" in library work
+Module <alarm> compiled
+Module <display> compiled
+No errors in compilation
+Analysis of file <"display.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <display> in library <work> with parameters.
+	h = "1"
+
+Analyzing hierarchy for module <dataSel1_4> in library <work>.
+
+Analyzing hierarchy for module <counter_2bit> in library <work>.
+
+Analyzing hierarchy for module <clk_1s> in library <work>.
+
+Analyzing hierarchy for module <clk_4ms> in library <work>.
+
+Analyzing hierarchy for module <BCDto7seg> in library <work>.
+
+Analyzing hierarchy for module <decoder2_4> in library <work>.
+
+Analyzing hierarchy for module <clock> in library <work> with parameters.
+	dGND = "0000"
+	h = "1"
+
+Analyzing hierarchy for module <alarm> in library <work> with parameters.
+	dGND = "0000"
+	h = "1"
+
+Analyzing hierarchy for module <cuckooRinging> in library <work>.
+
+Analyzing hierarchy for module <I2CslaveWith8bitsIO> in library <work> with parameters.
+	I2C_ADR = "0100111"
+
+Analyzing hierarchy for module <c74160> in library <work>.
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <display>.
+	h = 1'b1
+WARNING:Xst:905 - "display.v" line 70: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <tmp>
+Module <display> is correct for synthesis.
+ 
+Analyzing module <dataSel1_4> in library <work>.
+WARNING:Xst:905 - "dataSel1_4.v" line 29: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <d1>, <d2>, <d3>, <d4>
+Module <dataSel1_4> is correct for synthesis.
+ 
+Analyzing module <counter_2bit> in library <work>.
+Module <counter_2bit> is correct for synthesis.
+ 
+Analyzing module <clk_1s> in library <work>.
+Module <clk_1s> is correct for synthesis.
+ 
+Analyzing module <clk_4ms> in library <work>.
+Module <clk_4ms> is correct for synthesis.
+ 
+Analyzing module <BCDto7seg> in library <work>.
+Module <BCDto7seg> is correct for synthesis.
+ 
+Analyzing module <decoder2_4> in library <work>.
+Module <decoder2_4> is correct for synthesis.
+ 
+Analyzing module <clock> in library <work>.
+	dGND = 4'b0000
+	h = 1'b1
+Module <clock> is correct for synthesis.
+ 
+Analyzing module <c74160> in library <work>.
+Module <c74160> is correct for synthesis.
+ 
+Analyzing module <alarm> in library <work>.
+	dGND = 4'b0000
+	h = 1'b1
+Module <alarm> is correct for synthesis.
+ 
+Analyzing module <cuckooRinging> in library <work>.
+Module <cuckooRinging> is correct for synthesis.
+ 
+Analyzing module <I2CslaveWith8bitsIO> in library <work>.
+	I2C_ADR = 7'b0100111
+Module <I2CslaveWith8bitsIO> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <dataSel1_4>.
+    Related source file is "dataSel1_4.v".
+    Found 4-bit 4-to-1 multiplexer for signal <q>.
+    Summary:
+	inferred   4 Multiplexer(s).
+Unit <dataSel1_4> synthesized.
+
+
+Synthesizing Unit <counter_2bit>.
+    Related source file is "counter_2bit.v".
+    Found 2-bit up counter for signal <q>.
+    Summary:
+	inferred   1 Counter(s).
+Unit <counter_2bit> synthesized.
+
+
+Synthesizing Unit <clk_1s>.
+    Related source file is "clk_1s.v".
+    Found 1-bit register for signal <sigClk>.
+    Found 24-bit up counter for signal <counter>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   1 D-type flip-flop(s).
+Unit <clk_1s> synthesized.
+
+
+Synthesizing Unit <clk_4ms>.
+    Related source file is "clk_4ms.v".
+    Found 1-bit register for signal <clkOut>.
+    Found 16-bit up counter for signal <counter>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   1 D-type flip-flop(s).
+Unit <clk_4ms> synthesized.
+
+
+Synthesizing Unit <BCDto7seg>.
+    Related source file is "BCDto7seg.v".
+    Found 10x7-bit ROM for signal <seg>.
+    Summary:
+	inferred   1 ROM(s).
+Unit <BCDto7seg> synthesized.
+
+
+Synthesizing Unit <decoder2_4>.
+    Related source file is "decoder2_4.v".
+    Found 4x4-bit ROM for signal <m>.
+    Summary:
+	inferred   1 ROM(s).
+Unit <decoder2_4> synthesized.
+
+
+Synthesizing Unit <cuckooRinging>.
+    Related source file is "cuckooRinging.v".
+WARNING:Xst:2110 - Clock of register <ringIng> seems to be also used in the data or control logic of that element.
+    Found 1-bit register for signal <ringIng>.
+    Found 13-bit register for signal <soundFile>.
+    Summary:
+	inferred  14 D-type flip-flop(s).
+Unit <cuckooRinging> synthesized.
+
+
+Synthesizing Unit <I2CslaveWith8bitsIO>.
+    Related source file is "I2Cslave.v".
+WARNING:Xst:737 - Found 1-bit latch for signal <SDA_shadow>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit tristate buffer for signal <SDA>.
+    Found 1-bit register for signal <adr_match>.
+    Found 4-bit down counter for signal <bitcnt>.
+    Found 1-bit register for signal <data_phase>.
+    Found 1-bit register for signal <got_ACK>.
+    Found 1-bit register for signal <incycle>.
+    Found 8-bit register for signal <mem>.
+    Found 1-bit register for signal <op_read>.
+    Found 1-bit register for signal <SDAr>.
+    Found 1-bit xor2 for signal <start_or_stop$xor0000> created at line 30.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  14 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+	inferred   1 Tristate(s).
+Unit <I2CslaveWith8bitsIO> synthesized.
+
+
+Synthesizing Unit <c74160>.
+    Related source file is "c74160.v".
+    Found 4-bit register for signal <q>.
+    Found 4-bit adder for signal <q$addsub0000> created at line 43.
+    Found 4-bit comparator greater for signal <q$cmp_gt0000> created at line 42.
+    Summary:
+	inferred   4 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <c74160> synthesized.
+
+
+Synthesizing Unit <clock>.
+    Related source file is "clock.v".
+WARNING:Xst:646 - Signal <rcoS_> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <rcoM_> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <rcoH_> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS_d3> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS_d2> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS_d1> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS_d0> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS__d3> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS__d2> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <qS__d1> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <qS___> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <qS__<3:1>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <qS_<3>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <qS_<1>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+Unit <clock> synthesized.
+
+
+Synthesizing Unit <alarm>.
+    Related source file is "alarm.v".
+WARNING:Xst:646 - Signal <rcoM_> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <rcoH_> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <minClkRate> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <hourClkRate> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <alarm> synthesized.
+
+
+Synthesizing Unit <display>.
+    Related source file is "display.v".
+WARNING:Xst:647 - Input <k> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <setSaM> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <setSaH> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <setSM> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <setSH> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <out> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <linkData> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:653 - Signal <SCL> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:737 - Found 2-bit latch for signal <tmp>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit xor2 for signal <dp$xor0000> created at line 46.
+    Found 16-bit comparator equal for signal <isSameTime>.
+    Found 2-bit up counter for signal <timePosition>.
+    Found 2-bit comparator equal for signal <tmp$cmp_eq0000> created at line 75.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   2 Comparator(s).
+Unit <display> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 2
+ 10x7-bit ROM                                          : 1
+ 4x4-bit ROM                                           : 1
+# Adders/Subtractors                                   : 11
+ 4-bit adder                                           : 11
+# Counters                                             : 5
+ 16-bit up counter                                     : 1
+ 2-bit up counter                                      : 2
+ 24-bit up counter                                     : 1
+ 4-bit down counter                                    : 1
+# Registers                                            : 29
+ 1-bit register                                        : 17
+ 13-bit register                                       : 1
+ 4-bit register                                        : 11
+# Latches                                              : 2
+ 1-bit latch                                           : 1
+ 2-bit latch                                           : 1
+# Comparators                                          : 13
+ 16-bit comparator equal                               : 1
+ 2-bit comparator equal                                : 1
+ 4-bit comparator greater                              : 11
+# Multiplexers                                         : 2
+ 1-bit 8-to-1 multiplexer                              : 1
+ 4-bit 4-to-1 multiplexer                              : 1
+# Tristates                                            : 1
+ 1-bit tristate buffer                                 : 1
+# Xors                                                 : 2
+ 1-bit xor2                                            : 2
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+WARNING:Xst:1290 - Hierarchical block <link> is unconnected in block <display>.
+   It will be removed from the design.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 2
+ 10x7-bit ROM                                          : 1
+ 4x4-bit ROM                                           : 1
+# Adders/Subtractors                                   : 11
+ 4-bit adder                                           : 11
+# Counters                                             : 5
+ 16-bit up counter                                     : 1
+ 2-bit up counter                                      : 2
+ 24-bit up counter                                     : 1
+ 4-bit down counter                                    : 1
+# Registers                                            : 74
+ Flip-Flops                                            : 74
+# Latches                                              : 2
+ 1-bit latch                                           : 1
+ 2-bit latch                                           : 1
+# Comparators                                          : 13
+ 16-bit comparator equal                               : 1
+ 2-bit comparator equal                                : 1
+ 4-bit comparator greater                              : 11
+# Multiplexers                                         : 2
+ 1-bit 8-to-1 multiplexer                              : 1
+ 4-bit 4-to-1 multiplexer                              : 1
+# Xors                                                 : 2
+ 1-bit xor2                                            : 2
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1426 - The value init of the FF/Latch incycle hinder the constant cleaning in the block I2CslaveWith8bitsIO.
+   You should achieve better results by setting this init to 1.
+WARNING:Xst:1710 - FF/Latch <incycle> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SDAr> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <adr_match> (without init value) has a constant value of 1 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <data_phase> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <got_ACK> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_0> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <op_read> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_1> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_2> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_5> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_3> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_4> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_6> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mem_7> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <SDA_shadow> is unconnected in block <I2CslaveWith8bitsIO>.
+WARNING:Xst:1710 - FF/Latch <bitcnt_0> (without init value) has a constant value of 1 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <bitcnt_1> (without init value) has a constant value of 1 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <bitcnt_2> (without init value) has a constant value of 1 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <bitcnt_3> (without init value) has a constant value of 0 in block <I2CslaveWith8bitsIO>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <display> ...
+
+Optimizing unit <cuckooRinging> ...
+
+Optimizing unit <c74160> ...
+
+Optimizing unit <clock> ...
+
+Optimizing unit <alarm> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block display, actual ratio is 3.
+
+Final Macro Processing ...
+
+Processing Unit <display> :
+	Found 13-bit shift register for signal <ring/soundFile_0>.
+Unit <display> processed.
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 91
+ Flip-Flops                                            : 91
+# Shift Registers                                      : 1
+ 13-bit shift register                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : display.ngr
+Top Level Output File Name         : display
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 41
+
+Cell Usage :
+# BELS                             : 311
+#      GND                         : 1
+#      INV                         : 8
+#      LUT1                        : 38
+#      LUT2                        : 23
+#      LUT2_D                      : 1
+#      LUT3                        : 41
+#      LUT3_D                      : 3
+#      LUT3_L                      : 1
+#      LUT4                        : 87
+#      LUT4_D                      : 4
+#      LUT4_L                      : 5
+#      MUXCY                       : 52
+#      MUXF5                       : 6
+#      VCC                         : 1
+#      XORCY                       : 40
+# FlipFlops/Latches                : 94
+#      FD                          : 1
+#      FDC                         : 1
+#      FDCE                        : 44
+#      FDE_1                       : 2
+#      FDR                         : 44
+#      LDCP_1                      : 2
+# Shift Registers                  : 1
+#      SRL16                       : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 38
+#      IBUF                        : 13
+#      OBUF                        : 25
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s400tq144-4 
+
+ Number of Slices:                      110  out of   3584     3%  
+ Number of Slice Flip Flops:             94  out of   7168     1%  
+ Number of 4 input LUTs:                212  out of   7168     2%  
+    Number used as logic:               211
+    Number used as Shift registers:       1
+ Number of IOs:                          41
+ Number of bonded IOBs:                  39  out of     97    40%  
+ Number of GCLKs:                         2  out of      8    25%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+tmp_cmp_eq0000(tmp_cmp_eq000021:O) | NONE(*)(tmp_0)         | 2     |
+sysclk                             | BUFGP                  | 42    |
+tick2/clkOut                       | NONE(swapDigit/q_0)    | 2     |
+molClk/m__/q_0                     | NONE(timePosition_0)   | 2     |
+ring/ringAble(ring/ringAble_f5:O)  | NONE(*)(ring/ringIng)  | 1     |
+tick/sigClk1                       | BUFG                   | 46    |
+-----------------------------------+------------------------+-------+
+(*) These 2 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+---------------------------------------------+------------------------+-------+
+Control Signal                               | Buffer(FF name)        | Load  |
+---------------------------------------------+------------------------+-------+
+molAlarm/h_/notMr_inv(XST_GND:G)             | NONE(molAlarm/h_/q_0)  | 44    |
+ring/yoodRong_inv(ring/yoodRong_inv1_INV_0:O)| NONE(ring/ringIng)     | 1     |
+tmp_0__and0000(tmp_0__and00001:O)            | NONE(tmp_0)            | 1     |
+tmp_0__and0001(tmp_0__and00011:O)            | NONE(tmp_0)            | 1     |
+tmp_1__and0000(tmp_1__and00001:O)            | NONE(tmp_1)            | 1     |
+tmp_1__and0001(tmp_1__and00011:O)            | NONE(tmp_1)            | 1     |
+---------------------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 8.783ns (Maximum Frequency: 113.856MHz)
+   Minimum input arrival time before clock: 11.060ns
+   Maximum output required time after clock: 12.857ns
+   Maximum combinational path delay: 13.832ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'sysclk'
+  Clock period: 6.405ns (frequency: 156.128MHz)
+  Total number of paths / destination ports: 1310 / 84
+-------------------------------------------------------------------------
+Delay:               6.405ns (Levels of Logic = 2)
+  Source:            tick2/counter_14 (FF)
+  Destination:       tick2/counter_0 (FF)
+  Source Clock:      sysclk falling
+  Destination Clock: sysclk falling
+
+  Data Path: tick2/counter_14 to tick2/counter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              2   0.720   1.216  tick2/counter_14 (tick2/counter_14)
+     LUT4:I0->O            1   0.551   0.996  tick2/counter_and000017 (tick2/counter_and000017)
+     LUT4:I1->O           17   0.551   1.345  tick2/counter_and000064 (tick2/counter_and0000)
+     FDR:R                     1.026          tick2/counter_0
+    ----------------------------------------
+    Total                      6.405ns (2.848ns logic, 3.557ns route)
+                                       (44.5% logic, 55.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'tick2/clkOut'
+  Clock period: 4.750ns (frequency: 210.526MHz)
+  Total number of paths / destination ports: 7 / 4
+-------------------------------------------------------------------------
+Delay:               4.750ns (Levels of Logic = 1)
+  Source:            swapDigit/q_0 (FF)
+  Destination:       swapDigit/q_0 (FF)
+  Source Clock:      tick2/clkOut rising
+  Destination Clock: tick2/clkOut rising
+
+  Data Path: swapDigit/q_0 to swapDigit/q_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             16   0.720   1.576  swapDigit/q_0 (swapDigit/q_0)
+     LUT2:I0->O            2   0.551   0.877  swapDigit/q_and00001 (swapDigit/q_and0000)
+     FDR:R                     1.026          swapDigit/q_0
+    ----------------------------------------
+    Total                      4.750ns (2.297ns logic, 2.453ns route)
+                                       (48.4% logic, 51.6% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'molClk/m__/q_0'
+  Clock period: 4.579ns (frequency: 218.388MHz)
+  Total number of paths / destination ports: 7 / 4
+-------------------------------------------------------------------------
+Delay:               4.579ns (Levels of Logic = 1)
+  Source:            timePosition_0 (FF)
+  Destination:       timePosition_0 (FF)
+  Source Clock:      molClk/m__/q_0 rising
+  Destination Clock: molClk/m__/q_0 rising
+
+  Data Path: timePosition_0 to timePosition_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              7   0.720   1.405  timePosition_0 (timePosition_0)
+     LUT2:I0->O            2   0.551   0.877  timePosition_cmp_eq00001 (timePosition_cmp_eq0000)
+     FDR:R                     1.026          timePosition_0
+    ----------------------------------------
+    Total                      4.579ns (2.297ns logic, 2.282ns route)
+                                       (50.2% logic, 49.8% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'tick/sigClk1'
+  Clock period: 8.783ns (frequency: 113.856MHz)
+  Total number of paths / destination ports: 837 / 78
+-------------------------------------------------------------------------
+Delay:               8.783ns (Levels of Logic = 5)
+  Source:            molClk/m__/q_3 (FF)
+  Destination:       molClk/h_/q_0 (FF)
+  Source Clock:      tick/sigClk1 rising
+  Destination Clock: tick/sigClk1 rising
+
+  Data Path: molClk/m__/q_3 to molClk/h_/q_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            12   0.720   1.457  molClk/m__/q_3 (molClk/m__/q_3)
+     LUT3:I0->O            1   0.551   0.827  molClk/m__/rco_and0000_SW2_G_SW0 (N105)
+     LUT4:I3->O            1   0.551   0.000  molClk/m__/rco_and0000_SW2_G (N102)
+     MUXF5:I1->O           1   0.360   0.869  molClk/m__/rco_and0000_SW2 (N93)
+     LUT4:I2->O            1   0.551   0.827  molClk/h_/q_not0001_SW0 (N60)
+     LUT4:I3->O            4   0.551   0.917  molClk/h_/q_not0001 (molClk/h_/q_not0001)
+     FDCE:CE                   0.602          molClk/h_/q_0
+    ----------------------------------------
+    Total                      8.783ns (3.886ns logic, 4.897ns route)
+                                       (44.2% logic, 55.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'tmp_cmp_eq0000'
+  Total number of paths / destination ports: 4 / 2
+-------------------------------------------------------------------------
+Offset:              2.914ns (Levels of Logic = 2)
+  Source:            setM (PAD)
+  Destination:       tmp_0 (LATCH)
+  Destination Clock: tmp_cmp_eq0000 rising
+
+  Data Path: setM to tmp_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            11   0.821   1.339  setM_IBUF (setM_IBUF)
+     LUT3:I1->O            1   0.551   0.000  tmp_mux0000<1>1 (tmp_mux0000<1>)
+     LDCP_1:D                  0.203          tmp_1
+    ----------------------------------------
+    Total                      2.914ns (1.575ns logic, 1.339ns route)
+                                       (54.0% logic, 46.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'ring/ringAble'
+  Total number of paths / destination ports: 3 / 1
+-------------------------------------------------------------------------
+Offset:              3.274ns (Levels of Logic = 3)
+  Source:            setM (PAD)
+  Destination:       ring/ringIng (FF)
+  Destination Clock: ring/ringAble rising
+
+  Data Path: setM to ring/ringIng
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            11   0.821   1.339  setM_IBUF (setM_IBUF)
+     LUT4:I1->O            1   0.551   0.000  ring/ringAble1 (ring/ringAble1)
+     MUXF5:I0->O           2   0.360   0.000  ring/ringAble_f5 (ring/ringAble)
+     FDC:D                     0.203          ring/ringIng
+    ----------------------------------------
+    Total                      3.274ns (1.935ns logic, 1.339ns route)
+                                       (59.1% logic, 40.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'tick/sigClk1'
+  Total number of paths / destination ports: 210 / 51
+-------------------------------------------------------------------------
+Offset:              11.060ns (Levels of Logic = 6)
+  Source:            displayMode (PAD)
+  Destination:       molClk/h_/q_0 (FF)
+  Destination Clock: tick/sigClk1 rising
+
+  Data Path: displayMode to molClk/h_/q_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            25   0.821   2.152  displayMode_IBUF (displayMode_IBUF)
+     LUT2:I0->O            3   0.551   1.246  _AUX_2<0>1 (cSetM)
+     LUT2:I0->O            1   0.551   0.801  molClk/nand4_SW0 (N58)
+     MUXF5:S->O            1   0.621   0.869  molClk/m__/rco_and0000_SW2 (N93)
+     LUT4:I2->O            1   0.551   0.827  molClk/h_/q_not0001_SW0 (N60)
+     LUT4:I3->O            4   0.551   0.917  molClk/h_/q_not0001 (molClk/h_/q_not0001)
+     FDCE:CE                   0.602          molClk/h_/q_0
+    ----------------------------------------
+    Total                     11.060ns (4.248ns logic, 6.812ns route)
+                                       (38.4% logic, 61.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'tick2/clkOut'
+  Total number of paths / destination ports: 94 / 12
+-------------------------------------------------------------------------
+Offset:              11.608ns (Levels of Logic = 4)
+  Source:            swapDigit/q_0 (FF)
+  Destination:       seg<6> (PAD)
+  Source Clock:      tick2/clkOut rising
+
+  Data Path: swapDigit/q_0 to seg<6>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             16   0.720   1.576  swapDigit/q_0 (swapDigit/q_0)
+     LUT3:I0->O            1   0.551   0.000  valSwap/Mmux_q_3 (valSwap/Mmux_q_3)
+     MUXF5:I1->O           7   0.360   1.405  valSwap/Mmux_q_2_f5 (valDigit<0>)
+     LUT4:I0->O            1   0.551   0.801  valDisplaySig/Mrom_seg21 (seg_2_OBUF)
+     OBUF:I->O                 5.644          seg_2_OBUF (seg<2>)
+    ----------------------------------------
+    Total                     11.608ns (7.826ns logic, 3.782ns route)
+                                       (67.4% logic, 32.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'tick/sigClk1'
+  Total number of paths / destination ports: 226 / 9
+-------------------------------------------------------------------------
+Offset:              12.857ns (Levels of Logic = 5)
+  Source:            molAlarm/h_/q_1 (FF)
+  Destination:       seg<6> (PAD)
+  Source Clock:      tick/sigClk1 rising
+
+  Data Path: molAlarm/h_/q_1 to seg<6>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             8   0.720   1.278  molAlarm/h_/q_1 (molAlarm/h_/q_1)
+     LUT3:I1->O            1   0.551   0.996  _AUX_1<13>1 (h_<1>)
+     LUT3:I1->O            1   0.551   0.000  valSwap/Mmux_q_41 (valSwap/Mmux_q_41)
+     MUXF5:I0->O           7   0.360   1.405  valSwap/Mmux_q_2_f5_0 (valDigit<1>)
+     LUT4:I0->O            1   0.551   0.801  valDisplaySig/Mrom_seg61 (seg_6_OBUF)
+     OBUF:I->O                 5.644          seg_6_OBUF (seg<6>)
+    ----------------------------------------
+    Total                     12.857ns (8.377ns logic, 4.480ns route)
+                                       (65.2% logic, 34.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'ring/ringAble'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              8.712ns (Levels of Logic = 2)
+  Source:            ring/ringIng (FF)
+  Destination:       buzz (PAD)
+  Source Clock:      ring/ringAble rising
+
+  Data Path: ring/ringIng to buzz
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              1   0.720   0.996  ring/ringIng (ring/ringIng)
+     LUT2:I1->O            1   0.551   0.801  ring/buzzer1 (buzz_OBUF)
+     OBUF:I->O                 5.644          buzz_OBUF (buzz)
+    ----------------------------------------
+    Total                      8.712ns (6.915ns logic, 1.797ns route)
+                                       (79.4% logic, 20.6% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 121 / 16
+-------------------------------------------------------------------------
+Delay:               13.832ns (Levels of Logic = 6)
+  Source:            displayMode (PAD)
+  Destination:       seg<6> (PAD)
+
+  Data Path: displayMode to seg<6>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            25   0.821   2.152  displayMode_IBUF (displayMode_IBUF)
+     LUT3:I0->O            1   0.551   0.996  _AUX_1<7>1 (m_<3>)
+     LUT3:I1->O            1   0.551   0.000  valSwap/Mmux_q_33 (valSwap/Mmux_q_33)
+     MUXF5:I1->O           7   0.360   1.405  valSwap/Mmux_q_2_f5_2 (valDigit<3>)
+     LUT4:I0->O            1   0.551   0.801  valDisplaySig/Mrom_seg41 (seg_4_OBUF)
+     OBUF:I->O                 5.644          seg_4_OBUF (seg<4>)
+    ----------------------------------------
+    Total                     13.832ns (8.478ns logic, 5.354ns route)
+                                       (61.3% logic, 38.7% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 3.95 secs
+ 
+--> 
+
+Total memory usage is 306944 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   52 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

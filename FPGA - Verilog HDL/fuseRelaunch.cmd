@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/I2C_slave_TB_isim_beh.exe" -prj "C:/Users/Codustry/Dropbox/CPE/digital/project/cuckooExten/I2C_slave_TB_beh.prj" "work.I2C_slave_TB" 

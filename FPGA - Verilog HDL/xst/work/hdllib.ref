@@ -1,0 +1,12 @@
+MO clock NULL clock.v vlg20/clock.bin 1461603654
+MO display NULL display.v vlg1E/display.bin 1461603654
+MO alarm NULL alarm.v vlg2D/alarm.bin 1461603654
+MO I2CslaveWith8bitsIO NULL I2Cslave.v vlg7B/_i2_cslave_with8bits_i_o.bin 1461603654
+MO clk_1s NULL clk_1s.v vlg19/clk__1s.bin 1461603654
+MO BCDto7seg NULL BCDto7seg.v vlg26/_b_c_dto7seg.bin 1461603654
+MO dataSel1_4 NULL dataSel1_4.v vlg5A/data_sel1__4.bin 1461603654
+MO decoder2_4 NULL decoder2_4.v vlg6B/decoder2__4.bin 1461603654
+MO c74160 NULL c74160.v vlg31/c74160.bin 1461603654
+MO clk_4ms NULL clk_4ms.v vlg1D/clk__4ms.bin 1461603654
+MO cuckooRinging NULL cuckooRinging.v vlg2E/cuckoo_ringing.bin 1461603654
+MO counter_2bit NULL counter_2bit.v vlg3C/counter__2bit.bin 1461603654
